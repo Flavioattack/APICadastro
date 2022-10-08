@@ -1,0 +1,70 @@
+﻿@model List<APIProjetoUpd8.Models.Cliente>
+@*{System.Runtime.CompilerServices.AsyncTaskMethodBuilder<Microsoft.AspNetCore.Mvc.IActionResult>.AsyncStateMachineBox<APIProjetoUpd8.Controllers.ClienteController.<ListaClientes>d__3>}*@
+
+@{
+    ViewData["Title"] = "Lista de Clientes";
+}
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role="button" asp-controller="Cliente" asp-action="Cadastro">Adicionar novo Cliente</a>
+    </div>
+    <br />
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+        <br />
+    }
+    <h1 class="display-4">Lista de Clientes</h1>
+    <table class="table table-borderless table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Data de Nascimento</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Endereco</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Cidade</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var cliente in Model)
+                {
+
+                    <tr>
+                        <th scope="row">@cliente.Id</th>
+                        <td>@cliente.Cpf</td>
+                        <td>@cliente.Nome</td>
+                        <td>@cliente.DataNascimento</td>
+                        <td>@cliente.Sexo</td>
+                        <td>@cliente.Endereco</td>
+                        <td>@cliente.Estado</td>
+                        <td>@cliente.Cidade</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-primary" asp-route-id="@cliente.Id" asp-controller="Cadastro" asp-action="Editar">Editar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    @* }*@
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
