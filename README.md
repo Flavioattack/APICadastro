@@ -1,9 +1,7 @@
 # ProjetoUpd8
 CONFIGURAÇÕES INICIAIS DO PROJETO
 
--Acesse o projeto da API e encontre o arquivo "appsettings.json" e dentro da sessão "ConnectionString" -> "ServerConnection" coloque a referencia a sua instancia de banco de dados.
-
-(obs: Será necessario adicionar essa referencia nos 2 projetos, no projeto do front, só é necessario por conta do método POST, ao fazer direto da pagina .cshtml ele retornava o status 415, por conta disso foi criado um método no controler para consumir a api utilizandos os métodos POST, DELETE E PUT)
+-Acesse o projeto da API e encontre o arquivo "appsettings.json" e dentro da sessão "ConnectionString" -> "ServerConnection" coloque a referencia a sua instancia de banco de dados.(obs: Será necessario adicionar essa referencia nos 2 projetos, no projeto do front, só é necessario por conta do método POST, ao fazer direto da pagina .cshtml ele retornava o status 415, por conta disso foi criado um método no controler para consumir a api utilizandos os métodos POST, DELETE E PUT)
 
 
 DETALHES DO PROJETO
