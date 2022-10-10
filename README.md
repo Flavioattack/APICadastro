@@ -33,6 +33,6 @@ DETALHES DO PROJETO
 
 -Na parte do acesso ao banco de dados foi utilizado o EntityFrameworkCore junto com o SQL SERVER.
 
-
+-Para faciliar a visualição da rotas, o visual studio já inclui automaticamente o swagger, eu deixei ela no projeto justamente por isso.
 
 
