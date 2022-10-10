@@ -128,12 +128,14 @@
         }
         $('#dropEstado').on('change', function () {
             CarregaDropMunicipio(this.value);
+            
         });
 
         $(".novoCliente").click(function () {
             escolherTituloModal("Cadastro de novo cliente");
             mostrarModal();
             preencheComboEstado();
+       
             limparFormulario();
 
             $('.Id').val(0);
