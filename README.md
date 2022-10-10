@@ -29,7 +29,7 @@ DETALHES DO PROJETO
 -A manipulação da tabela é feita usando a biblioteca do https://datatables.net/, nela as funções de paginação e manipulação da tabela já estão prontos.
 
 
--A API em si, pode ser acessada pela seguinte URL: "https://localhost:7062/api/Cliente" após a execução Foi criado apenas um CRUD básico na API.
+-A API em si, pode ser acessada pela seguinte URL: "https://localhost:7062/api/Cliente" após a execução do projena, nela foi criado apenas um CRUD básico.
 
 -Na parte do acesso ao banco de dados foi utilizado o EntityFrameworkCore junto com o SQL SERVER.
 
