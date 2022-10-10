@@ -276,7 +276,6 @@
 
         function montarTabela(clientes) {
 
-            //alert(dados.id);
             var indice = 0;
             var divTabela = document.getElementById("divTabela");
             var tabela = '<div class="list-group">';
@@ -436,7 +435,7 @@
             let EstadoValida = true;
             if (Estado.trim() == '' || Estado == undefined || Estado == "Selecione um estado") {
                 $(".Estado").addClass('is-invalid');
-                $(".erroEstado").text("Escolha Estado");
+                $(".erroEstado").text("Escolha o Estado");
                 $(".erroEstado").removeClass("d-none");
                 EstadoValido = false;
             }
@@ -472,7 +471,7 @@
         }
         function validarMunicipio(Municipio) {
             let CidadeValida = true;
-            if (Municipio.trim() == '' || Municipio == undefined) {
+            if (Municipio.trim() == '' || Municipio == undefined || Municipio == 'Selecione um Municipio') {
                 $(".Municipio").addClass('is-invalid');
                 $(".erroMunicipio").text("Escolha o municipio");
                 $(".erroMunicipio").removeClass("d-none");
@@ -503,6 +502,7 @@
             $(".Sexo").removeClass('is-valid');
             $(".Endereco").val('');
             $(".Endereco").removeClass('is-valid');
+            $(".Estado").val('');
             $(".Estado").removeClass('is-valid');
             $(".Municipio").val('');
             $(".Municipio").removeClass('is-valid');
