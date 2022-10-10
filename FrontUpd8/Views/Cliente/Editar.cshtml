@@ -3,136 +3,511 @@
     ViewData["Title"] = "Lista de Clientes";
 }
 
-<div class="list-group">
-    <div class="text-center">
+@{
+    ViewData["Title"] = "clientes Cadastradas";
+}
+<div class="class=" d-flex flex-column"">
+    <div class="p-5">
+        <div class="border border-light border-3 rounded">
+            <div class="container">
+                <div class="p-5">
+                    <div class="row">
+                        <div class="col-8">
+                            <h3 class="text-secundary">Clientes cadastrados</h3>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm btn-outline-success novoCliente">Novo cliente</button>
+                        </div>
+                    </div>
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a class="btn btn-primary" role="button" asp-controller="Cliente" asp-action="Cadastro">Adicionar novo Cliente</a>
+                    <hr />
+                    <div class="p-1 shadow-sm" id="divTabela">
+                    </div>
+
+                </div>
+            </div>
         </div>
-        <br />
-        @if (TempData["MensagemSucesso"] != null)
-        {
-            <div class="alert alert-success" role="alert">
-                <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
-                @TempData["MensagemSucesso"]
+    </div>
+
+
+    <div id="modal" class="modal fade" role="dialog">
+
+        <div class="modal-dialog table-borderless">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title"></h6>
+                </div>
+
+                <div class="modal-body" id="modal">
+                    <input type="hidden" class="form-control form-control-sm Id" />
+                    <div class="form-group">
+                        <label>CPF</label>
+                        <input type="number" maxlength="11" class="form-control form-control-sm Cpf" />
+                        <span class="text-danger erroCpf d-none"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-control form-control-sm Nome" />
+                        <span class="text-danger erroNome d-none"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data de Nascimento</label>
+                        <input type="date" class="form-control form-control-sm DataNascimento" />
+                        <span class="text-danger erroDataNascimento d-none">Escolha uma data de nascimento</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sexo</label>
+                        <br />
+                        <input type="radio" for="feminino" value="F" name="Sexo" class="Sexo" placeholder="Feminino" />
+                        <label class="mx-1" for="feminino">Feminino</label>
+                        <input type="radio" for="masculino" value="M" name="Sexo" class="Sexo" placeholder="Masculino" />
+                        <label class="mx-1" for="masculino">Masculino</label>
+                        <div>
+                            <span class="text-danger erroSexo d-none"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estado</label></>
+                        <br />
+                        <select name="Estado" class="form-control-sm form-control-sm Estado" id="dropEstado">
+                        </select>
+                        <span class="text-danger erroEstado d-none">Escolha o Estado</span>
+                    </div>
+
+                    <div class="form-group dropdown">
+                        <label>Municipio</label></>
+                        <br />
+                        <select name="Municipio" class="form-control-sm form-control-sm dropdown Municipio" id="dropMunicipio">
+                        </select>
+                        <span class="text-danger erroMunicipio d-none">Digite um Municipio</span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Endereco</label>
+                        <input type="text" class="form-control form-control-sm dropdown Endereco" />
+                        <span class="text-danger erroEndereco d-none">Digite um Endereco</span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <input type="button" value="Salvar" class="btn btn-sm btn-outline-success btnSalvar" />
+                            <input type="button" value="Cancelar" class="btn btn-sm btn-light" data-bs-dismiss="modal" />
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        }
-        @if (TempData["MensagemErro"] != null)
-        {
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
-                @TempData["MensagemErro"]
-            </div>
-            <br />
-        }
-        <h1 class="display-4">Lista de Clientes</h1>
-        <table class="table id='myTable' table-borderless table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Data de Nascimento</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Endereco</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Cidade</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null)
-                {
-                    foreach (var cliente in Model)
-                    {
-
-                        <tr>
-                            <th scope="row">@cliente.Id</th>
-                            <td>@cliente.Cpf</td>
-                            <td>@cliente.Nome</td>
-                            <td>@cliente.DataNascimento</td>
-                            <td>@cliente.Sexo</td>
-                            <td>@cliente.Endereco</td>
-                            <td>@cliente.Estado</td>
-                            <td>@cliente.Cidade</td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a role="button" class="btn btn-primary" onclick="PreencheCliente(@cliente.Id)">Editar</a>
-                                </div>
-                            </td>
-                        </tr>
-                        @* }*@
-                    }
-                }
-
-            </tbody>
-        </table>
+        </div>
     </div>
 </div>
-<div>
-    <form asp-controller="Cliente" asp-action="Cadastro" method="post">
-        <section class="wrap">
-            <div class="form-group">
-                <label for="cpf">CPF</label>
-                <input type="text" class="form-group col-md-2" placeholder="Digite o cpf do cliente" />
-                @Html.ValidationMessageFor(x => x[0].Cpf)
-            </div>
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" id="Nome" class="form-control" placeholder="Digite o nome do cliente" />
-                @Html.ValidationMessageFor(x => x[0].Nome)
-            </div>
-            <div class="form-group">
-                <label for="DataNascimento">Data de Nascimento</label>
-                <input type="date" id="DataNascimento" class="form" placeholder="Selecione a data de nascimento" />
-                @Html.ValidationMessageFor(x => x[0].DataNascimento)
-            </div>
-            <div class="form-group">
-                <label for="Sexo">Sexo</label>
-                <br />
-                <input type="radio" id="Sexo" value="F" name="Sexo" placeholder="Feminino" /> Feminino
-                <input type="radio" id="Sexo" value="M" name="Sexo" placeholder="Masculino" /> Masculino
-                @Html.ValidationMessageFor(x => x[0].Sexo)
-            </div>
-            <div class="form-group">
-                <label for="nome">Endereço</label>
-                <input type="text" id="Endereco" class="form-control" placeholder="Digite o endereço do cliente" />
-                @Html.ValidationMessageFor(x => x[0].Endereco)
-            </div>
-            <div class="form-group">
-                <label for="Estado">Estado</label>
-                <input type="text" id="Estado" class="form-control" placeholder="Digite o nome do contato" />
-                @Html.ValidationMessageFor(x => x[0].Estado)
-            </div>
-            <div class="form-group">
-                <label for="cidade">Municipio</label>
-                <input type="text" id="Cidade" class="form-control" placeholder="Digite o nome do contato" />
-                @Html.ValidationMessageFor(x => x[0].Cidade)
-            </div>
-        </section>
-        <button type="submit" class="btn btn-primary btn-block">Buscar</button>
-        <a class="btn btn-secondary btn-block" asp-controller="cliente" asp-action="Cadastro" role="button">Voltar</a>
-    </form>
-</div>
 
+
+
+@section scripts {
     <script>
         $(document).ready(function () {
-            $('#myTable').DataTable();
-        });    
-    </script>
+            carregarDados();
 
-    <script>
-        function carregaDados(int codId) {
-            var Cpf = $('#cpf');
-            var Nome = $('#Nome');
-            var DataNascimento = $('#DataNascimento');
-            var Sexo = $('#Sexo');
-            var Endereco = $('#Endereço');
-            var Estado = $('#Estado');
-            var Cidade = $('#Cidade');
-            alert(Cidade);
+        });
+        function carregarDados() {
+            $.ajax({
+                url: "https://localhost:7062/api/Cliente",
+                method: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    montarTabela(data, Object.keys(data).length);
+                }
+            });
+
+        }
+        $('#dropEstado').on('change', function () {
+            CarregaDropMunicipio(this.value);
+        });
+
+        $(".novoCliente").click(function () {
+            escolherTituloModal("Cadastro de novo cliente");
+            mostrarModal();
+            preencheComboEstado();
+            limparFormulario();
+
+            $('.Id').val(0);
+        });
+        $(".btnSalvar").click(function () {
+            var cliente = {
+                id: $('.Id').val(),
+                cpf: $('.Cpf').val(),
+                nome: $('.Nome').val(),
+                dataNascimento: $('.DataNascimento').val(),
+                sexo: $('input[name=Sexo]:checked', '#modal').val(),
+                endereco: $('.Endereco').val(),
+                estado: $('.Estado :selected').text(),
+                municipio: $('.Municipio :selected').text()
+            };
+            if (validarFormulario(cliente)) {
+                if (parseInt(cliente.id) > 0)
+                    atualizarcliente(cliente);
+                criarcliente(cliente);
+            }
+        });
+        function criarcliente(cliente) {
+
+            $.ajax({
+                url: "Cliente/Cadastro",
+                method: 'POST',
+                data: {
+                    cliente: cliente
+                },
+                success: function (clienteCriada) {
+                    $("#modal").modal('hide');
+                    carregarDados();
+                }
+            });
+        }
+        function pegarclientePeloId(Id) {
+            $.ajax({
+                url: "https://localhost:7062/api/Cliente/" + Id,
+                method: 'GET',
+                data: {
+                    Id: Id
+                },
+                success: function (cliente) {
+                    mostrarModal();
+                    preencheComboEstado();
+                    escolherTituloModal(`Atualizar cliente ${cliente.data.nome}`);
+                    $(".Id").val(Id);
+                    $(".Cpf").val(cliente.data.cpf);
+                    $(".Nome").val(cliente.data.nome);
+                    var data = cliente.data.dataNascimento.toString().split('T')[0];
+                    $(".DataNascimento").val(data);
+                    $('input[name="Sexo"][value="' + cliente.data.sexo + '"]').prop('checked', true);
+                    $(".Endereco").val(cliente.data.endereco);
+                    $(".Estado").val(cliente.data.estado);
+                    CarregaDropMunicipio(cliente.data.municipio);
+                }
+            })
+        }
+        function atualizarcliente(cliente) {
+            $.ajax({
+                url: "Cliente/Alterar",
+                method: 'PUT',
+                data: {
+                    cliente: cliente
+                },
+                success: function (cliente) {
+                    $("#modal").modal('hide');
+                    carregarDados();
+                }
+            });
+        }
+        function excluircliente(Id) {
+            $.ajax({
+                url: "Cliente/Deletar",
+                method: 'DELETE',
+                data: {
+                    Id: Id
+                },
+                success: function (status) {
+                    if (status) {
+                        alert("cliente excluída com sucesso");
+                        carregarDados();
+                    }
+                    else
+                        alert(status.mensagem);
+                }
+            })
+        }
+        function preencheComboEstado() {
+            $.ajax({
+                url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados",
+                method: "GET",
+                success: function (data) {
+                    var dropdown = $('#dropEstado');
+                    dropdown.empty();
+
+                    dropdown.append('<option selected="true">Selecione um estado</option>');
+                    dropdown.prop('selectedIndex', -1);
+
+                    $.each(data, function (key, entry) {
+                        dropdown.append($('<option></option>')
+                            .attr('value', entry.id)
+                            .text(entry.sigla));
+                    })
+                }
+            });
+        }
+        function CarregaDropMunicipio(codUF) {
+            var dropdown = $('#dropMunicipio');
+            dropdown.empty();
+            dropdown.append('<option selected="true">Selecione um Municipio</option>');
+
+            if (codUF != "Selecione um estado" && codUF.length <= 2) {
+                $.ajax({
+                    url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + codUF + "/municipios",
+                    method: "GET",
+                    success: function (data) {
+                        $.each(data, function (key, entry) {
+                            dropdown.append($('<option></option>')
+                                .attr('value', entry.id)
+                                .text(entry.nome));
+                        })
+                    }
+                });
+            }
+            else {
+                dropdown.append('<option selected="true">' + codUF + '</option>');
+
+            }
+        }
+
+        function montarTabela(clientes) {
+
+            //alert(dados.id);
+            var indice = 0;
+            var divTabela = document.getElementById("divTabela");
+            var tabela = '<div class="list-group">';
+            tabela += '<div class="text-center" border> '
+            tabela += '<table id="myTable" class="table-borderless table tabela">';
+            tabela += '<thead>';
+            tabela += '<tr>';
+            tabela += '<th scope="col">ID</th>';
+            tabela += '<th scope="col">CPF</th>';
+            tabela += '<th scope="col">Nome</th>';
+            tabela += '<th scope="col">Data de Nascimento</th>';
+            tabela += '<th scope="col">Sexo</th>';
+            tabela += '<th scope="col" style="display:none;">Endereco</th>';
+            tabela += '<th scope="col">Estado</th>';
+            tabela += '<th scope="col">Municipio</th>';
+            tabela += '</tr>';
+            tabela += '</thead>';
+            tabela += '<tbody>';
+
+
+            for (indice = 0; indice < clientes.data.length; indice++) {
+                tabela += `<tr>`;
+                tabela += `<td>${clientes.data[indice].id}</td>`;
+                tabela += `<td>${clientes.data[indice].cpf}</td>`;
+                tabela += `<td>${clientes.data[indice].nome}</td>`;
+
+                var data = clientes.data[indice].dataNascimento.toString().split('T')[0];
+                data = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3-$2-$1');
+                tabela += `<td>${data}</td>`;
+                tabela += `<td>${clientes.data[indice].sexo}</td>`;
+                tabela += `<td style="display:none;">${clientes.data[indice].endereco}</td>`;
+                tabela += `<td>${clientes.data[indice].estado}</td>`;
+                tabela += `<td>${clientes.data[indice].municipio}</td>`;
+                tabela += `<div class="btn-group" role="group">`;
+                tabela += `<td><button class="btn btn-outline-primary" onclick="pegarclientePeloId(${clientes.data[indice].id})">Atualizar</button></td> <td><button class="btn  btn-outline-danger" onclick="excluircliente(${clientes.data[indice].id})">Excluir</button></td>`;
+                tabela += '</tr>';
+
+
+            }
+            tabela += '</tbody>';
+            tabela += '</table>';
+            tabela += '</div>'
+            tabela += '</div>'
+            divTabela.innerHTML = tabela;
+            $('myTable').dataTable();
+
+        }
+        function validarFormulario(cliente) {
+            let nomeValido = validarNome(cliente.nome);
+            let dataNascimentoValida = validarDataNascimento(cliente.dataNascimento);
+            let enderecoValido = validarEndereco(cliente.endereco);
+            let sexoValido = validarSexo(cliente.sexo);
+            let municipioValida = validarMunicipio(cliente.municipio);
+            let estadoValido = validarEstado(cliente.estado);
+            let cpfValido = ValidarCPF(cliente.cpf);
+
+
+            if (nomeValido == true && dataNascimentoValida == true && enderecoValido == true && municipioValida == true && sexoValido == true && estadoValido == true && cpfValido == true)
+                return true;
+            return false;
+        }
+
+        function ValidarCPF(cpf) {
+            if (cpf == undefined || cpf == '') {
+                $(".Cpf").addClass('is-invalid');
+                $(".erroCpf").text("Digite um CPF");
+                $(".erroCpf").removeClass("d-none");
+                return false
+            }
+            exp = /\.|-/g;
+            cpf = cpf.toString().replace(exp, "");
+            var digitoDigitado = eval(cpf.charAt(9) + cpf.charAt(10));
+            var soma1 = 0,
+                soma2 = 0;
+            var vlr = 11;
+            for (i = 0; i < 9; i++) {
+                soma1 += eval(cpf.charAt(i) * (vlr - 1));
+                soma2 += eval(cpf.charAt(i) * vlr);
+                vlr--;
+            }
+            soma1 = (((soma1 * 10) % 11) === 10 ? 0 : ((soma1 * 10) % 11));
+            soma2 = (((soma2 + (2 * soma1)) * 10) % 11);
+            if (cpf === "11111111111" || cpf === "22222222222" || cpf === "33333333333" || cpf === "44444444444" || cpf === "55555555555" || cpf === "66666666666" || cpf === "77777777777" || cpf === "88888888888" || cpf === "99999999999" || cpf === "00000000000") {
+                var digitoGerado = null;
+            } else {
+                var digitoGerado = (soma1 * 10) + soma2;
+            }
+            if (digitoGerado !== digitoDigitado) {
+                $(".Cpf").addClass('is-invalid');
+                $(".erroCpf").text("CPF Invalido");
+                $(".erroCpf").removeClass("d-none");
+                return false;
+
+            }
+            $(".Cpf").removeClass('is-invalid');
+            $(".Cpf").addClass('is-valid');
+            $(".erroCpf").addClass("d-none");
+            return true;
+        }
+
+        function validarSexo(sexo) {
+            let sexoValido = true;
+
+            if (sexo == undefined) {
+                $(".Sexo").addClass('is-invalid');
+                $(".erroSexo").text("Escolha um sexo");
+                $(".erroSexo").removeClass("d-none");
+                sexoValido = false;
+            }
+            else {
+                $(".Sexo").removeClass('is-invalid');
+                $(".Sexo").addClass('is-valid');
+                $(".erroSexo").addClass("d-none");
+                sexoValido = true;
+            }
+            return sexoValido;
+        }
+        function validarNome(nome) {
+            let nomeValido = true;
+            if (nome.trim() == '' || nome == undefined) {
+                $(".Nome").addClass('is-invalid');
+                $(".erroNome").text("Preencha o nome");
+                $(".erroNome").removeClass("d-none");
+                nomeValido = false;
+            }
+            else if (nome.length > 200) {
+                $(".Nome").addClass('is-invalid');
+                $(".erroNome").text("Use menos caracteres");
+                $(".erroNome").removeClass("d-none");
+                nomeValido = false;
+            }
+            else {
+                $(".Nome").removeClass('is-invalid');
+                $(".Nome").addClass('is-valid');
+                $(".erroNome").addClass("d-none");
+                nomeValido = true;
+            }
+            return nomeValido;
+        }
+        function validarDataNascimento(DataNascimento) {
+            let DataNascimentoValida = true;
+            if (DataNascimento == undefined || DataNascimento == '') {
+                $(".DataNascimento").addClass('is-invalid');
+                $(".erroDataNascimento").text("Preencha a data de nascimento");
+                $(".erroDataNascimento").removeClass("d-none");
+                DataNascimentoValida = false;
+            }
+            else {
+                $(".DataNascimento").removeClass('is-invalid');
+                $(".DataNascimento").addClass('is-valid');
+                $(".erroDataNascimento").addClass("d-none");
+                DataNascimentoValida = true;
+            }
+            return DataNascimentoValida;
+        }
+        function validarEstado(Estado) {
+            let EstadoValida = true;
+            if (Estado.trim() == '' || Estado == undefined || Estado == "Selecione um estado") {
+                $(".Estado").addClass('is-invalid');
+                $(".erroEstado").text("Escolha Estado");
+                $(".erroEstado").removeClass("d-none");
+                EstadoValido = false;
+            }
+            else {
+                $(".Estado").removeClass('is-invalid');
+                $(".Estado").addClass('is-valid');
+                $(".erroEstado").addClass("d-none");
+                EstadoValido = true;
+            }
+            return EstadoValido;
+        }
+        function validarEndereco(Endereco) {
+            let EnderecoValida = true;
+            if (Endereco.trim() == '' || Endereco == undefined) {
+                $(".Endereco").addClass('is-invalid');
+                $(".erroEndereco").text("Digite o endereço");
+                $(".erroEndereco").removeClass("d-none");
+                EnderecoValida = false;
+            }
+            else if (Endereco.length < 5) {
+                $(".Endereco").addClass('is-invalid');
+                $(".erroEndereco").text("Use Mais caracteres");
+                $(".erroEndereco").removeClass("d-none");
+                EnderecoValida = false;
+            }
+            else {
+                $(".Endereco").removeClass('is-invalid');
+                $(".Endereco").addClass('is-valid');
+                $(".erroEndereco").addClass("d-none");
+                EnderecoValida = true;
+            }
+            return EnderecoValida;
+        }
+        function validarMunicipio(Municipio) {
+            let CidadeValida = true;
+            if (Municipio.trim() == '' || Municipio == undefined) {
+                $(".Municipio").addClass('is-invalid');
+                $(".erroMunicipio").text("Escolha o municipio");
+                $(".erroMunicipio").removeClass("d-none");
+                MunicipioValida = false;
+            }
+            else {
+                $(".Municipio").removeClass('is-invalid');
+                $(".Municipio").addClass('is-valid');
+                $(".erroMunicipio").addClass("d-none");
+                CidadeValida = true;
+            }
+            return CidadeValida;
+        }
+        function mostrarModal() {
+            new bootstrap.Modal($("#modal"), {}).show();
+            //para inserir um valor default na drop down
+            CarregaDropMunicipio("Selecione um estado");
+
+        }
+        function limparFormulario() {
+            $(".Id").val('');
+            $(".Cpf").val('');
+            $(".Cpf").removeClass('is-valid');
+            $(".Nome").val('');
+            $(".Nome").removeClass('is-valid');
+            $(".DataNascimento").val('');
+            $(".DataNascimento").removeClass('is-valid');
+            $('input[name="Sexo"][value]').prop('checked', false);
+            $(".Sexo").removeClass('is-valid');
+            $(".Endereco").val('');
+            $(".Endereco").removeClass('is-valid');
+            $(".Estado").val('');
+            $(".Estado").removeClass('is-valid');
+            $(".Municipio").val('');
+            $(".Municipio").removeClass('is-valid');
+
+        }
+        function escolherTituloModal(texto) {
+            $(".modal-title").text(texto);
         }
     </script>
+}
+
+
 
 
 

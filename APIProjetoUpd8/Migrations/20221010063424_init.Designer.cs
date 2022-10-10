@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using DbContext = APIProjetoUpd8.Data.DbContext;
 
 #nullable disable
 
-namespace APIProjeto.Migrations
+namespace APIProjetoUpd8.Migrations
 {
-    [DbContext(typeof(DbContext))]
-    [Migration("20221007143228_init")]
+    [DbContext(typeof(APIProjetoUpd8.Data.DbContext))]
+    [Migration("20221010063424_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +32,6 @@ namespace APIProjeto.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<long>("Cpf")
                         .HasColumnType("bigint");
 
@@ -48,6 +43,10 @@ namespace APIProjeto.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Municipio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

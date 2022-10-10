@@ -17,12 +17,12 @@ namespace FrontUpd8.Controllers
         private readonly DbContext _clienteContext;
         APIProjetoUpd8.Controllers.ClienteController API;
 
-        Metodos SupAPI;
+        //Metodos SupAPI;
 
         public ClienteController(DbContext clienteContext)
         {
             API = new APIProjetoUpd8.Controllers.ClienteController(clienteContext);
-            SupAPI = new Metodos(clienteContext);
+            //SupAPI = new Metodos(clienteContext);
             _clienteContext = clienteContext;
         }
 
@@ -35,10 +35,10 @@ namespace FrontUpd8.Controllers
         public IActionResult Editar()
         {
             
-            var str = SupAPI.RetornaSeasson();
-            var obj = JsonConvert.DeserializeObject<List<APIProjetoUpd8.Models.Cliente>>(str);
+           //var str = SupAPI.RetornaSeasson();
+           // var obj = JsonConvert.DeserializeObject<List<APIProjetoUpd8.Models.Cliente>>(str);
 
-            return View (obj);
+            return View ();
 
         }
 
@@ -47,44 +47,27 @@ namespace FrontUpd8.Controllers
 
         [HttpPost]
 
-        public IActionResult Cadastro(APIProjetoUpd8.Models.Cliente cliente)
+        public JsonResult Cadastro(APIProjetoUpd8.Models.Cliente cliente)
         {
-            try
-            {
-                API.InsertClientes(cliente);
-                return RedirectToAction("Editar",cliente);
-            }
-            catch (System.Exception)
-            {
-                TempData["MensagemErro"] = "Erro ao cadastrar Cliente!";
-                return RedirectToAction("Cadastro");
-            }
+                var obj = API.InsertClientes(cliente);
+                return new JsonResult(new {obj });
+
         }
 
-        [HttpPost]
+        [HttpPut]
 
-        public IActionResult Alterar(APIProjetoUpd8.Models.Cliente cliente)
+        public JsonResult Alterar(APIProjetoUpd8.Models.Cliente cliente)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    API.UpdateCliente(cliente);
-
-                    TempData["MensagemSucesso"] = "Cliente atualizado com sucesso!";
-                    return RedirectToAction("Index");
-                }
-
-                return View("Editar", cliente);
-            }
-
-            catch (System.Exception)
-            {
-                TempData["MensagemErro"] = "Erro ao atualizar o Cliente!";
-                return RedirectToAction("Index");
-            }
+            var obj = API.UpdateCliente(cliente);
+            return new JsonResult (new {obj});
         }
+        [HttpDelete]
 
+        public JsonResult Deletar(int id)
+        {
+            var obj = API.DeleteCliente(id);
+            return new JsonResult(new { obj });
+        }
     }
 }
 

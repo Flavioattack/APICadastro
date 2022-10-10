@@ -1,5 +1,6 @@
 using APIProjetoUpd8.Data;
 using FluentAssertions.Common;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DbContext = APIProjetoUpd8.Data.DbContext;
 
@@ -12,10 +13,26 @@ builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "Politica",
+                      policy =>
+                      {
+                          policy.WithOrigins("https://localhost:7091")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod(); ;
+                      });
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddMvc();
+
+
+
+
+
 
 
 
@@ -39,6 +56,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCookiePolicy();
 app.UseSession();
+app.UseCors("Politica");
 
 
 app.UseAuthorization();

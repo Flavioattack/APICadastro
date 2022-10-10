@@ -7,7 +7,7 @@ namespace APIProjetoUpd8.Data
     public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         public DbContext(DbContextOptions<DbContext> options)
-            : base(options) 
+            : base(options)
         {
 
         }
@@ -15,17 +15,13 @@ namespace APIProjetoUpd8.Data
         public DbSet<Cliente> clientes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            try
-            { 
-                IConfiguration configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", true, true).Build();
 
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("ServerConnection"));
-            }
-            catch 
-            {
-                optionsBuilder.UseSqlServer("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Clientes; Data Source=DESKTOP-OOI83AP");
-            }
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", false, true).Build();
+
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("ServerConnection"));
+
+
         }
     }
 }

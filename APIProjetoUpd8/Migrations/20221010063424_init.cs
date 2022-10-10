@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace APIProjeto.Migrations
+namespace APIProjetoUpd8.Migrations
 {
     public partial class init : Migration
     {
@@ -21,7 +21,7 @@ namespace APIProjeto.Migrations
                     Sexo = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     Endereco = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Municipio = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

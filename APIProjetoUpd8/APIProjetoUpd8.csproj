@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNet.ScriptManager.jQuery" Version="3.6.0" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="FluentAssertions" Version="6.7.0" />
     <PackageReference Include="Microsoft.AspNet.Providers.Core" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
@@ -28,6 +29,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="runtime.any.System.Collections" Version="4.3.0" />
     <PackageReference Include="runtime.native.System" Version="4.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />

@@ -23,7 +23,7 @@ namespace APIProjetoUpd8.Models
         [Required(ErrorMessage = "Selecione o estado do cliente")]
         public string Estado { get; set; }
 
-        [Required(ErrorMessage = "Selecione a cidade do cliente")]
-        public string Cidade { get; set; }
+        [Required(ErrorMessage = "Selecione a Municipio do cliente")]
+        public string Municipio { get; set; }
     }
 }
