@@ -5,6 +5,7 @@ CONFIGURAÇÕES INICIAIS DO PROJETO
 
 
 DETALHES DO PROJETO
+
 -O projeto do front foi construido 100% com jquery e ajax e bootstrap, ele foi feito de uma maneira que pareça uma aplicação SPA(single-page-application) em nenhum momento tem a necessidade do reload da pagina, basicamente no html só tem o modal, a tabela é contruida via jquery de acordo com os dados recebidos da API, essa requisição também foi feita na própia pagina utilizando o AJAX. 
 
 
@@ -24,7 +25,8 @@ DETALHES DO PROJETO
 
 -A API em si, pode ser acessada pela seguinte URL: "https://localhost:7062/api/Cliente" após a execução Foi criado apenas um CRUD basico na API.
 
--Na parte do acesso ao banco de dados foi utilizado o EntityFrameworkCore.
+-Na parte do acesso ao banco de dados foi utilizado o EntityFrameworkCore junto com o SQL SERVER.
+
 
 
 
