@@ -6,17 +6,18 @@
 @{
     ViewData["Title"] = "clientes Cadastradas";
 }
-<div class="class=" d-flex flex-column"">
+
+<div class="d-flex flex-column">
     <div class="p-5">
-        <div class="border border-light border-3 rounded">
-            <div class="container">
+        <div class="border border-light border-3 rounded d-flex flex-column">
+            <div class="">
                 <div class="p-5">
                     <div class="row">
                         <div class="col-8">
-                            <h3 class="text-secundary">Clientes cadastrados</h3>
+                            <h2 class="text-secundary">Clientes Cadastrados</h2>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm btn-outline-success novoCliente">Novo cliente</button>
+                            <button class="d-flex justify-content-end btn btn-outline-success novoCliente">Novo cliente</button>
                         </div>
                     </div>
 
@@ -128,14 +129,14 @@
         }
         $('#dropEstado').on('change', function () {
             CarregaDropMunicipio(this.value);
-            
+
         });
 
         $(".novoCliente").click(function () {
             escolherTituloModal("Cadastro de novo cliente");
             mostrarModal();
-            preencheComboEstado();
-       
+            preencheComboEstado(str = "novo");
+
             limparFormulario();
 
             $('.Id').val(0);
@@ -180,7 +181,6 @@
                 },
                 success: function (cliente) {
                     mostrarModal();
-                    preencheComboEstado();
                     escolherTituloModal(`Atualizar cliente ${cliente.data.nome}`);
                     $(".Id").val(Id);
                     $(".Cpf").val(cliente.data.cpf);
@@ -189,7 +189,7 @@
                     $(".DataNascimento").val(data);
                     $('input[name="Sexo"][value="' + cliente.data.sexo + '"]').prop('checked', true);
                     $(".Endereco").val(cliente.data.endereco);
-                    $(".Estado").val(cliente.data.estado);
+                    preencheComboEstado(cliente.data.estado);
                     CarregaDropMunicipio(cliente.data.municipio);
                 }
             })
@@ -224,16 +224,17 @@
                 }
             })
         }
-        function preencheComboEstado() {
+        function preencheComboEstado(valor) {
+            var dropdown = $('#dropEstado');
+            dropdown.empty();
+            dropdown.append('<option selected="true">Selecione um estado</option>');
+            dropdown.prop('selectedIndex', -1);
+
             $.ajax({
                 url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados",
                 method: "GET",
                 success: function (data) {
-                    var dropdown = $('#dropEstado');
-                    dropdown.empty();
 
-                    dropdown.append('<option selected="true">Selecione um estado</option>');
-                    dropdown.prop('selectedIndex', -1);
 
                     $.each(data, function (key, entry) {
                         dropdown.append($('<option></option>')
@@ -242,6 +243,12 @@
                     })
                 }
             });
+            if(valor.length == 2)
+            {
+                dropdown.append('<option selected="true">' + valor + '</option>');
+                var estadoAtual = $('.Estado :selected').val();
+                CarregaDropMunicipio(estadoAtual);
+            }
         }
         function CarregaDropMunicipio(codUF) {
             var dropdown = $('#dropMunicipio');
@@ -482,7 +489,6 @@
         function mostrarModal() {
             new bootstrap.Modal($("#modal"), {}).show();
             //para inserir um valor default na drop down
-            CarregaDropMunicipio("Selecione um estado");
 
         }
         function limparFormulario() {
@@ -497,7 +503,6 @@
             $(".Sexo").removeClass('is-valid');
             $(".Endereco").val('');
             $(".Endereco").removeClass('is-valid');
-            $(".Estado").val('');
             $(".Estado").removeClass('is-valid');
             $(".Municipio").val('');
             $(".Municipio").removeClass('is-valid');

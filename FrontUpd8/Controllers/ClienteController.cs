@@ -26,20 +26,9 @@ namespace FrontUpd8.Controllers
             _clienteContext = clienteContext;
         }
 
-
-        public IActionResult Cadastro()
-        {
-            return View();//Como vai tá em branco para criar
-        }
-
         public IActionResult Editar()
         {
-            
-           //var str = SupAPI.RetornaSeasson();
-           // var obj = JsonConvert.DeserializeObject<List<APIProjetoUpd8.Models.Cliente>>(str);
-
             return View ();
-
         }
 
         ////Ao entrar na view esses comandos serão chamados
