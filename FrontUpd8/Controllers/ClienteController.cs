@@ -1,12 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-//using FrontUpd8.Models;
-using APIProjetoUpd8;
-using APIProjetoUpd8.Controllers;
 using DbContext = APIProjetoUpd8.Data.DbContext;
-using FrontUpd8.Models;
-using System.Collections.Generic;
-using FluentAssertions;
-using Newtonsoft.Json;
 
 namespace FrontUpd8.Controllers
 {

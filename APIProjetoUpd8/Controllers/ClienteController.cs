@@ -35,7 +35,7 @@ namespace APIProjetoUpd8.Controllers
         }
 
         [HttpGet("{codigo}")]
-        public async Task<IActionResult> ListaClientes(Int64 codigo) 
+        public async Task<IActionResult> ListaClientes(Int64 codigo)
         {
             var _id = codigo;
             return Ok(new
@@ -44,21 +44,22 @@ namespace APIProjetoUpd8.Controllers
                 data = await _dbContext.clientes.FirstOrDefaultAsync(e => e.Id == _id)
             });
         }
-    
+
         [HttpPost]
-        public async Task<JsonResult> InsertClientes([FromBody] Cliente cliente) 
+        public async Task<JsonResult> InsertClientes([FromBody] Cliente cliente)
         {
-            if (ModelState.IsValid) { 
+            if (ModelState.IsValid)
+            {
                 await _dbContext.clientes.AddAsync(cliente);
                 await _dbContext.SaveChangesAsync();
 
-                return new JsonResult(new { cliente});
+                return new JsonResult(new { cliente });
             }
-            return new JsonResult(new {ModelState });
+            return new JsonResult(new { ModelState });
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateCliente (Cliente cliente)
+        public async Task<ActionResult> UpdateCliente(Cliente cliente)
         {
             _dbContext.clientes.Update(cliente);
             await _dbContext.SaveChangesAsync();
@@ -66,7 +67,7 @@ namespace APIProjetoUpd8.Controllers
             {
                 Sucess = true,
                 data = cliente
-            }); 
+            });
         }
 
         [HttpDelete("{codigo}")]
@@ -75,9 +76,9 @@ namespace APIProjetoUpd8.Controllers
             var remove = _dbContext.clientes.FirstOrDefault(e => e.Id == _id);
             _dbContext.clientes.Remove(remove);
             await _dbContext.SaveChangesAsync();
-            
-            return new JsonResult(new {remove});
-    } 
+
+            return new JsonResult(new { remove });
+        }
     }
     //public class Metodos : ControllerBase
     //{
